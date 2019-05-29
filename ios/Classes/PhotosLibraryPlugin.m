@@ -70,7 +70,14 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
                         break;
                 }
                 if(PHAssetMediaTypeUnknown != mediaType) {
-                    PHFetchResult<PHAsset *>* fetchedResults = [PHAsset fetchAssetsWithMediaType:mediaType options:nil];
+                    
+                    PHFetchOptions *allPhotosfetchOption = [[PHFetchOptions alloc]init];
+                    allPhotosfetchOption.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+                    allPhotosfetchOption.predicate = [NSPredicate predicateWithFormat:@"mediaType == 1 || mediaType == 2"];
+                    
+                    PHFetchResult<PHAsset *>* fetchedResults = [PHAsset fetchAssetsWithOptions:allPhotosfetchOption];
+                    
+//                    PHFetchResult<PHAsset *>* fetchedResults = [PHAsset fetchAssetsWithMediaType:mediaType options:nil];
                     NSMutableArray* assets = [NSMutableArray arrayWithCapacity:fetchedResults.count];
                     for (PHAsset* asset in fetchedResults) {
                         [assets addObject:asset.assetDictionary];

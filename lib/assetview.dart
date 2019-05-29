@@ -8,8 +8,12 @@ class AssetView extends StatefulWidget {
   final Asset asset;
   final double width;
   final double height;
+
   AssetView(
-      {@required this.index, @required this.asset, @required this.width, @required this.height});
+      {@required this.index,
+      @required this.asset,
+      @required this.width,
+      @required this.height});
 
   @override
   State<StatefulWidget> createState() => AssetState(
@@ -29,7 +33,10 @@ class AssetState extends State<AssetView> {
   String _channelName;
 
   AssetState(
-      {@required this.index, @required this.asset, @required this.width, @required this.height}) {
+      {@required this.index,
+      @required this.asset,
+      @required this.width,
+      @required this.height}) {
     const prefix = 'flutter.yang.me/photos_library/image';
     this._channelName = prefix + '/' + this.asset.identifier;
   }
@@ -59,17 +66,19 @@ class AssetState extends State<AssetView> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      child: Image.asset('assets/videoStart.png'),
-    );
-
-//    return Stack(
-//      fit: StackFit.expand,
-//      children: <Widget>[
-//        Image.asset('assets/videoStart.png'),
-//      ],
-//    );
+    if (null != this._imageData) {
+      return Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Image.memory(
+            this._imageData.buffer.asUint8List(),
+            fit: BoxFit.cover,
+            width: this.width,
+            height: this.height,
+          ),
+        ],
+      );
+    }
 
 
 //    if (null != this._imageData) {
