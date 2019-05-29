@@ -59,18 +59,31 @@ class AssetState extends State<AssetView> {
 
   @override
   Widget build(BuildContext context) {
-    if (null != this._imageData) {
-      return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 2000),
-        child: Image.memory(
-          this._imageData.buffer.asUint8List(),
-          fit: BoxFit.cover,
-          width: this.width,
-          height: this.height,
-        ),
-        key: ValueKey<ByteData>(this._imageData),
-      );
-    }
+
+    return Container(
+      child: Image.asset('assets/videoStart.png'),
+    );
+
+//    return Stack(
+//      fit: StackFit.expand,
+//      children: <Widget>[
+//        Image.asset('assets/videoStart.png'),
+//      ],
+//    );
+
+
+//    if (null != this._imageData) {
+//      return AnimatedSwitcher(
+//        duration: const Duration(milliseconds: 2000),
+//        child: Image.memory(
+//          this._imageData.buffer.asUint8List(),
+//          fit: BoxFit.cover,
+//          width: this.width,
+//          height: this.height,
+//        ),
+//        key: ValueKey<ByteData>(this._imageData),
+//      );
+//    }
 
     return Text(
       '${this.index}',

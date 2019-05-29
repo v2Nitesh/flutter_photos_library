@@ -54,7 +54,9 @@ class PhotosLibrary {
       var asset = Asset(
           identifier: item['identifier'],
           width: item['width'],
-          height: item['height']);
+          height: item['height'],
+        mediaType: item['type']
+      );
       assets.add(asset);
     }
     return assets;
